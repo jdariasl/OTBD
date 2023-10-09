@@ -1,5 +1,5 @@
-course_id = 'EACD-04-MACHINE-LEARNING-1'
-github_repo = 'UDEA-Esp-Analitica-y-Ciencia-de-Datos/%s'%course_id
+course_id = 'OTBD'
+github_repo = 'jdariasl/OTBD'
 zip_file_url="https://github.com/%s/archive/master.zip"%github_repo
 
 def get_last_modif_date(localdir):
@@ -13,11 +13,10 @@ def get_last_modif_date(localdir):
     except Exception:
         return None
     
-import requests, zipfile, io, os, shutil
 def init(force_download=False):
     if force_download or not os.path.exists("local"):
         print("replicating local resources")
-        dirname = course_id+"-master/"
+        dirname = github_repo.split("/")[-1]+"-main/"
         if os.path.exists(dirname):
             shutil.rmtree(dirname)
         r = requests.get(zip_file_url)
@@ -25,5 +24,10 @@ def init(force_download=False):
         z.extractall()
         if os.path.exists("local"):
             shutil.rmtree("local")
-        shutil.move(dirname+"/local", "local")
+        if os.path.exists(dirname+"/content/local"):
+            shutil.move(dirname+"/content/local", "local")
+        elif os.path.exists(dirname+"/local"):
+            shutil.move(dirname+"/local", "local")
         shutil.rmtree(dirname)
+
+import requests, zipfile, io, os, shutil
