@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Markdown Files" href="markdown.html" />
+    <link rel="next" title="Machine Learning Contextualisation" href="content/intros/Ch2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,10 +155,13 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals of Optimization and First Order Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="content/intros/Ch2.html">Machine Learning Contextualisation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/notebooks/examples/Example_2_1.html">Example_2_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/notebooks/examples/Example_2_3.html">Example_2_3</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -352,7 +355,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-slides">Course slides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-content-and-slides">Course content and slides</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part1-fundamentals-of-optimization-and-first-order-methods">Part1: Fundamentals of Optimization and First Order Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part2-second-order-methods-and-large-scale-optimisation">Part2: Second Order Methods and Large Scale Optimisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part3-automatic-differentiation-and-hyperparameter-selection">Part3: Automatic differentiation and hyperparameter selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-course-material">Interactive course material</a></li>
 </ul>
             </nav>
         </div>
@@ -368,16 +377,39 @@ document.write(`
 <h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this heading">#</a></h1>
 <p>Welcome to the <strong>Optimization Techniques for Bid Data Analysis (OTBD)</strong> course, which is part of the Signal Processing and machine learning for big data track of the <a class="reference external" href="https://ssr.upm.es/en/mutsc/">Master of Science in Signal Theory and Communications</a>.</p>
 <p>This course delves into the fundamental concepts and theoretical underpinnings of convex optimization, offering a comprehensive set of algorithms designed to address a wide range of standard optimization challenges in the field of Machine Learning. Additionally, the course explores algorithm variations tailored for local processing within distributed environments, particularly suitable for handling large-scale data scenarios.</p>
-<section id="course-slides">
-<h2>Course slides<a class="headerlink" href="#course-slides" title="Permalink to this heading">#</a></h2>
+<section id="course-content-and-slides">
+<h2>Course content and slides<a class="headerlink" href="#course-content-and-slides" title="Permalink to this heading">#</a></h2>
+<section id="part1-fundamentals-of-optimization-and-first-order-methods">
+<h3>Part1: Fundamentals of Optimization and First Order Methods<a class="headerlink" href="#part1-fundamentals-of-optimization-and-first-order-methods" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference download internal" download="" href="_downloads/5c5946bf0a4b243865f65845e2353370/OTBD___Ch1___Introduction.pdf"><span class="xref download myst">Introduction</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/75616bf829e9945a8045d14ffc0561da/OTBD___Ch2___Machine_Learning_Contextualization.pdf"><span class="xref download myst">Machine Learning Contextualisation</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/706506cc53106135f79e911ea52505f5/OTBD___Ch3___Review_of_Fundamentals_of_Convex_Optimization.pdf"><span class="xref download myst">Review of Fundamentals of Convex Optimisation</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/74baffb69495ea5cabc9a06495ff67dc/OTBD___Ch4___First_Order_Methods_applied_to_Neural_Networks.pdf"><span class="xref download myst">First Order Methods Applied to Neural Networks</span></a></p></li>
 </ul>
+</section>
+<section id="part2-second-order-methods-and-large-scale-optimisation">
+<h3>Part2: Second Order Methods and Large Scale Optimisation<a class="headerlink" href="#part2-second-order-methods-and-large-scale-optimisation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/10c9a88d2782fc4f92669b854c8a2c4f/OTBD___Ch5___Second_Order_Methods.pdf"><span class="xref download myst">Second Order Methods</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/75c7896f00dd5901ec8109f80ffcbd4b/OTBD___Ch6___Coordinate_Descent_Methods.pdf"><span class="xref download myst">Coordinate Descent Methods</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/c1883218cdab89adf306d08a80162c5d/OTBD___Ch7___Augmented_Lagrangian_Methods.pdf"><span class="xref download myst">Augmented Lagrangian Methods</span></a></p></li>
+</ul>
+</section>
+<section id="part3-automatic-differentiation-and-hyperparameter-selection">
+<h3>Part3: Automatic differentiation and hyperparameter selection<a class="headerlink" href="#part3-automatic-differentiation-and-hyperparameter-selection" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Symbolic differentiation and computational graphs</p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/877e998f461a3d32803a36a09272431d/OTBD___Ch9___Introduction_to_BO.pdf"><span class="xref download myst">Introduction to Bayesian Optimisation</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="interactive-course-material">
+<h2>Interactive course material<a class="headerlink" href="#interactive-course-material" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals of Optimization and First Order Methods</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/intros/Ch2.html">Machine Learning Contextualisation</a></li>
 </ul>
 </div>
 </section>
@@ -415,11 +447,11 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="right-next"
-       href="markdown.html"
+       href="content/intros/Ch2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Markdown Files</p>
+        <p class="prev-next-title">Machine Learning Contextualisation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -441,7 +473,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-slides">Course slides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-content-and-slides">Course content and slides</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part1-fundamentals-of-optimization-and-first-order-methods">Part1: Fundamentals of Optimization and First Order Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part2-second-order-methods-and-large-scale-optimisation">Part2: Second Order Methods and Large Scale Optimisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part3-automatic-differentiation-and-hyperparameter-selection">Part3: Automatic differentiation and hyperparameter selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-course-material">Interactive course material</a></li>
 </ul>
   </nav></div>
 
