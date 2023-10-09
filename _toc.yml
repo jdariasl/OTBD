@@ -10,4 +10,5 @@ parts:
       sections:
       - file: content/notebooks/examples/Example_2_1
       - file: content/notebooks/examples/Example_2_3
+      - file: content/notebooks/examples/Example_2_5
 
