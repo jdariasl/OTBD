@@ -1,2 +1,2 @@
 # OTBD
-Repository of the OTDB curse, parto of the MUTSC at UPM.
+Repository of the OTDB curse, part of the MUTSC at UPM.
