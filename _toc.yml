@@ -11,4 +11,6 @@ parts:
       - file: content/notebooks/examples/Example_2_1
       - file: content/notebooks/examples/Example_2_3
       - file: content/notebooks/examples/Example_2_5
+      - file: content/notebooks/examples/Example_2_6
+    - file: content/intros/Ch3
 

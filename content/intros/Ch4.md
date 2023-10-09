@@ -1,0 +1,1 @@
+# First Order Methods Applied to Neural Networks
