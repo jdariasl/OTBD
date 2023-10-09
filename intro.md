@@ -1,11 +1,12 @@
-# Welcome to your Jupyter Book
+# Welcome
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Welcome to the **Optimization Techniques for Bid Data Analysis (OTBD)** course, which is part of the Signal Processing and machine learning for big data track of the [Master of Science in Signal Theory and Communications](https://ssr.upm.es/en/mutsc/). 
 
-Check out the content pages bundled with this sample book to see more.
+This course delves into the fundamental concepts and theoretical underpinnings of convex optimization, offering a comprehensive set of algorithms designed to address a wide range of standard optimization challenges in the field of Machine Learning. Additionally, the course explores algorithm variations tailored for local processing within distributed environments, particularly suitable for handling large-scale data scenarios.
+
+## Course slides
+
+- [Introduction](content/slides/OTBD___Ch1___Introduction.pdf)
 
 ```{tableofcontents}
 ```
