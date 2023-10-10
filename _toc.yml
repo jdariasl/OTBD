@@ -46,6 +46,7 @@ parts:
       - file: content/Example_5_2
       - file: content/Case_study_5_1
       - file: content/Case_study_5_2
+      - file: content/Student_exam_oriented_ex_5_1
     - file: content/intros/Ch6
       sections:
       - file: content/Example_6_1
