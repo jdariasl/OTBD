@@ -25,7 +25,8 @@ parts:
       - file: content/Example_3_6
       - file: content/Case_study_3_1
       - file: content/Case_study_3_2
-      - file: content/Student_exam_oriented_exercise_3
+      - file: content/Student_exam_oriented_ex_3_1
+      - file: content/Student_exam_oriented_ex_3_2
     - file: content/intros/Ch4
       sections:
       - file: content/Example_4_1

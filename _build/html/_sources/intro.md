@@ -4,6 +4,8 @@ Welcome to the **Optimization Techniques for Bid Data Analysis (OTBD)** course, 
 
 This course delves into the fundamental concepts and theoretical underpinnings of convex optimization, offering a comprehensive set of algorithms designed to address a wide range of standard optimization challenges in the field of Machine Learning. Additionally, the course explores algorithm variations tailored for local processing within distributed environments, particularly suitable for handling large-scale data scenarios.
 
+----
+
 ## Course content and slides
 
 ### Part1: Fundamentals of Optimization and First Order Methods
@@ -23,7 +25,16 @@ This course delves into the fundamental concepts and theoretical underpinnings o
 - Symbolic differentiation and computational graphs
 - [Introduction to Bayesian Optimisation](content/slides/OTBD___Ch9___Introduction_to_BO.pdf) 
 
+----
+
 ## Interactive course material
 
 ```{tableofcontents}
 ```
+
+----
+
+[Download a ZIP file with the course's notebooks](https://github.com/jdariasl/OTBD/archive/main.zip)
+
+----
+
