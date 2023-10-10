@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Optimisation Techniques for Big Data Analysis course</title>
+    <title>Example_6_1 &#8212; Optimisation Techniques for Big Data Analysis course</title>
   
   
   
@@ -64,6 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Example_6_1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Augmented Lagrangian Methods" href="intros/Ch7.html" />
+    <link rel="prev" title="Coordinate Descent Methods" href="intros/Ch6.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -161,9 +163,42 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Example_2_3.html">Example_2_3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Example_2_5.html">Example_2_5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Example_2_6.html">Example_2_6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_7.html">Example_2_7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_8.html">Example_2_8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_9.html">Example_2_9</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="intros/Ch3.html">Review of Fundamentals of Convex Optimisation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch3.html">Review of Fundamentals of Convex Optimisation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_2.html">Example_3_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_4.html">Example_3_4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_5.html">Example_3_5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_6.html">Example_3_6</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch4.html">First Order Methods Applied to Neural Networks</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_1.html">Example_4_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_2.html">Example_4_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_3.html">Example_4_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_4.html">Example_4_4</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Second Order Methods and Large Scale Optimisation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch5.html">Second Order Methods</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_5_2.html">Example_5_2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intros/Ch6.html">Coordinate Descent Methods</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Example_6_1</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch7.html">Augmented Lagrangian Methods</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_7_2.html">Example_7_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_7_3.html">Example_7_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_7_4.html">Example_7_4</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -365,9 +400,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -378,19 +411,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Example_6_1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -400,10 +425,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="example-6-1">
+<h1>Example_6_1<a class="headerlink" href="#example-6-1" title="Permalink to this heading">#</a></h1>
+<p>Coordinate descent convergence for ridge regression</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>--no-cache<span class="w"> </span>-O<span class="w"> </span>init.py<span class="w"> </span>-q<span class="w"> </span>https://raw.githubusercontent.com/jdariasl/OTBD/main/content/init.py
+<span class="kn">import</span> <span class="nn">init</span><span class="p">;</span> <span class="n">init</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">force_download</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">ridge_reg</span><span class="p">,</span> <span class="n">ridge_reg_acc</span><span class="p">,</span> <span class="n">ridge_reg_gcd</span>
+<span class="kn">from</span> <span class="nn">local.lib.utils</span> <span class="kn">import</span> <span class="n">ridge_reg</span><span class="p">,</span> <span class="n">ridge_reg_acc</span><span class="p">,</span> <span class="n">ridge_reg_gcd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
@@ -456,6 +492,7 @@ document.write(`
 <img alt="../_images/2f1ba0e745be3509400c44332da0294afdd50b79c659ed32f01a4baa6ec96523.png" src="../_images/2f1ba0e745be3509400c44332da0294afdd50b79c659ed32f01a4baa6ec96523.png" />
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -488,6 +525,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intros/Ch6.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Coordinate Descent Methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="intros/Ch7.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Augmented Lagrangian Methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -497,20 +552,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
