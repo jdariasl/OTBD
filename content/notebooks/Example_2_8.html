@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Machine Learning Contextualisation &#8212; Optimisation Techniques for Big Data Analysis course</title>
+    <title>&lt;no title&gt; &#8212; Optimisation Techniques for Big Data Analysis course</title>
   
   
   
@@ -61,11 +61,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/intros/Ch2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/notebooks/Example_2_8';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Example_2_1" href="../notebooks/Example_2_1.html" />
-    <link rel="prev" title="Welcome" href="../../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,15 +155,15 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals of Optimization and First Order Methods</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Machine Learning Contextualisation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/Example_2_1.html">Example_2_1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/Example_2_3.html">Example_2_3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/Example_2_5.html">Example_2_5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks/Example_2_6.html">Example_2_6</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intros/Ch2.html">Machine Learning Contextualisation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_1.html">Example_2_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_3.html">Example_2_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_5.html">Example_2_5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_6.html">Example_2_6</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Ch3.html">Review of Fundamentals of Convex Optimisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intros/Ch3.html">Review of Fundamentals of Convex Optimisation</a></li>
 </ul>
 
     </div>
@@ -212,6 +210,37 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/jdariasl/OTBD/blob/master/content/notebooks/Example_2_8.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -237,7 +266,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/jdariasl/OTBD/issues/new?title=Issue%20on%20page%20%2Fcontent/intros/Ch2.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/jdariasl/OTBD/issues/new?title=Issue%20on%20page%20%2Fcontent/notebooks/Example_2_8.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -267,7 +296,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/content/intros/Ch2.md" target="_blank"
+      <li><a href="../../_sources/content/notebooks/Example_2_8.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -277,7 +306,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -336,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -347,11 +378,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Machine Learning Contextualisation</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -361,11 +400,48 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-contextualisation">
-<h1>Machine Learning Contextualisation<a class="headerlink" href="#machine-learning-contextualisation" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Generation</span> <span class="kn">import</span> <span class="n">scenarios_regression</span>
+<span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">plot_surface</span><span class="p">,</span> <span class="n">solver_cvx</span><span class="p">,</span> <span class="n">test_phase_reg</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
 </div>
-</section>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading scenarios</span>
+<span class="c1"># ===========================</span>
+<span class="n">scenario</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">data_reg</span><span class="p">,</span> <span class="n">set_up</span><span class="o">=</span><span class="n">scenarios_regression</span><span class="p">(</span><span class="n">scenario</span><span class="p">);</span>
+
+<span class="c1"># Definition of the problem</span>
+<span class="c1">#===================================</span>
+<span class="n">loss_LS</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">lambd</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">cp</span><span class="o">.</span><span class="n">pnorm</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">w</span> <span class="o">-</span> <span class="n">Y</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Solution of the empirical risk using CVX</span>
+<span class="c1">#=========================================</span>
+<span class="n">x_cvx</span><span class="o">=</span><span class="n">solver_cvx</span><span class="p">(</span><span class="n">set_up</span><span class="p">,</span><span class="n">loss_LS</span><span class="p">);</span>
+
+<span class="c1"># We test the regression solution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">set_up</span><span class="p">[</span><span class="s1">&#39;Xtrain&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">set_up</span><span class="p">[</span><span class="s1">&#39;ytrain&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Variable x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Variable y / regressor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Regression problem&#39;</span><span class="p">)</span>
+<span class="n">error</span><span class="o">=</span><span class="n">test_phase_reg</span><span class="p">(</span><span class="n">set_up</span><span class="p">,</span><span class="n">x_cvx</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.018386209116195967
+</pre></div>
+</div>
+<img alt="../../_images/ca134800c4808f0ab7786361c3472ef1c77904da534b669a42960f17fb89696c.png" src="../../_images/ca134800c4808f0ab7786361c3472ef1c77904da534b669a42960f17fb89696c.png" />
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -380,7 +456,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/intros"
+            path: "./content/notebooks"
         },
         predefinedOutput: true
     }
@@ -398,24 +474,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../../intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../notebooks/Example_2_1.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Example_2_1</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
@@ -425,6 +483,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
