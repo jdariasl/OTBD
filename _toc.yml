@@ -15,12 +15,16 @@ parts:
       - file: content/Example_2_7
       - file: content/Example_2_8
       - file: content/Example_2_9
+      - file: content/Case_study_2_1
+      - file: content/Case_study_2_2
     - file: content/intros/Ch3
       sections:
       - file: content/Example_3_2
       - file: content/Example_3_4
       - file: content/Example_3_5
       - file: content/Example_3_6
+      - file: content/Case_study_3_1
+      - file: content/Case_study_3_2
       - file: content/Student_exam_oriented_exercise_3
     - file: content/intros/Ch4
       sections:
@@ -28,18 +32,32 @@ parts:
       - file: content/Example_4_2
       - file: content/Example_4_3
       - file: content/Example_4_4
+      - file: content/Case_study_4_1
+      - file: content/Case_study_4_2
+      - file: content/Case_study_4_3
+      - file: content/Case_study_4_4
+      - file: content/Case_study_4_5
+      - file: content/Case_study_4_6
   - caption: Second Order Methods and Large Scale Optimisation
     chapters:
     - file: content/intros/Ch5
       sections:
       - file: content/Example_5_2
+      - file: content/Case_study_5_1
+      - file: content/Case_study_5_2
     - file: content/intros/Ch6
       sections:
       - file: content/Example_6_1
+      - file: content/Case_study_6_1
+      - file: content/Case_study_6_2
     - file: content/intros/Ch7
       sections:
       - file: content/Example_7_2
       - file: content/Example_7_3
       - file: content/Example_7_4
+      - file: content/Case_study_7_1
+      - file: content/Case_study_7_2
+      - file: content/Case_study_7_3
+      - file: content/Case_study_7_4
 
 
