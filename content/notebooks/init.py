@@ -24,8 +24,8 @@ def init(force_download=False):
         z.extractall()
         if os.path.exists("local"):
             shutil.rmtree("local")
-        if os.path.exists(dirname+"/content/local"):
-            shutil.move(dirname+"/content/local", "local")
+        if os.path.exists(dirname+"/content/notebooks/local"):
+            shutil.move(dirname+"/content/notebooks/local", "local")
         elif os.path.exists(dirname+"/local"):
             shutil.move(dirname+"/local", "local")
         shutil.rmtree(dirname)
