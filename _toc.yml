@@ -12,5 +12,8 @@ parts:
       - file: content/Example_2_3
       - file: content/Example_2_5
       - file: content/Example_2_6
+      - file: content/Example_2_7
     - file: content/intros/Ch3
+      sections:
+      - file: content/Student_exam_oriented_excercise_3
 
