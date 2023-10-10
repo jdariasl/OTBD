@@ -8,9 +8,9 @@ parts:
     chapters:
     - file: content/intros/Ch2
       sections:
-      - file: content/notebooks/Example_2_1
-      - file: content/notebooks/Example_2_3
-      - file: content/notebooks/Example_2_5
-      - file: content/notebooks/Example_2_6
+      - file: content/Example_2_1
+      - file: content/Example_2_3
+      - file: content/Example_2_5
+      - file: content/Example_2_6
     - file: content/intros/Ch3
 
