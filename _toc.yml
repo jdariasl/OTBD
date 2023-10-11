@@ -63,5 +63,6 @@ parts:
       - file: content/Case_study_7_3
       - file: content/Case_study_7_4
       - file: content/Student_exam_oriented_ex_7_1
+      - file: content/Student_exam_oriented_ex_7_2
 
 
