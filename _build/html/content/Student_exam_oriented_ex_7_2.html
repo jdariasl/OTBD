@@ -646,7 +646,7 @@ if\,\,y_{j,i}{\bf{w}}_j^T{\bf{x}}_{j,i}&lt;1
     <span class="c1">#Complete the code including the updating formulas for centrilized ADMM. </span>
     <span class="c1"># Keep the weigths values for all the iterations</span>
     
-    <span class="c1"># This loop simulates the processing execute in every node</span>
+    <span class="c1"># This loop simulates the processing to execute in every node</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb</span><span class="p">):</span>
         <span class="n">Xj</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="p">:(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">,:]</span> <span class="c1">#Input Samples observed by node j</span>
         <span class="n">yj</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="p">:(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">]</span>   <span class="c1">#Target values of the corresponding samples. </span>
