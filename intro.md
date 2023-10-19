@@ -22,7 +22,7 @@ This course delves into the fundamental concepts and theoretical underpinnings o
 - [Augmented Lagrangian Methods](content/slides/OTBD___Ch7___Augmented_Lagrangian_Methods.pdf)
 
 ### Part3: Automatic differentiation and hyperparameter selection
-- Symbolic differentiation and computational graphs
+- [Symbolic differentiation and computational graphs](content/C8_01_Simbolic_computing.ipynb)
 - [Introduction to Bayesian Optimisation](content/slides/OTBD___Ch9___Introduction_to_BO.pdf) 
 
 ----
@@ -35,6 +35,4 @@ This course delves into the fundamental concepts and theoretical underpinnings o
 ----
 
 [Download a ZIP file with the course's notebooks](https://github.com/jdariasl/OTBD/archive/main.zip)
-
-----
 

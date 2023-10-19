@@ -1,8 +1,10 @@
+from re import L
 import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np
 import cvxpy as cp
-from numpy import matlib as mb
+#from numpy import matlib as mb
+import tensorflow as tf
 
 
 def test_phase_reg(set_up, coef, color, name="Regression"):
@@ -50,7 +52,7 @@ def solver_cvx(set_up, objective_fn):
     problem = cp.Problem(
         cp.Minimize(objective_fn(set_up["Niter_train"], X_train, Y_train, w, lambd))
     )
-    problem.solve()
+    problem.solve(solver=cp.ECOS)
     return w.value
 
 
@@ -382,6 +384,26 @@ def ridge_reg_gcd(Niter, w, X, y, lambd, wopt):  # gradient coordinate descent
     )
     return f, fopt
 
+def ridge_tf(set_up,loss_f):
+    # symbolic variable
+    w = tf.Variable(initial_value=np.array(set_up["Initial"]).reshape(-1,1), dtype=tf.float32)
+    out_tf = []
+    Xtrain = set_up['Xtrain'][:,:set_up['d']+1]
+    Xtrain =  Xtrain.astype(np.float32)
+    Ytrain = np.array(set_up['ytrain'][:,0]).reshape(-1,1).astype(np.float32)
+    learning_rate = set_up["mu_grad"]
+    epochs = set_up["Niter_train"]
+    lamb = set_up["Lambda"]
+
+    #optimisatio loop
+    for _ in range(epochs):
+        with tf.GradientTape() as t:
+            loss = loss_f(Xtrain,Ytrain,w,lamb)
+        gw = t.gradient(loss, w)
+        w.assign_sub(learning_rate * gw)
+        out_tf.append(w.numpy().flatten())
+    out_tf = np.r_[out_tf]
+    return out_tf
 
 def calculation_subgrad_svm(Niter_train, Xtrain, ytrain, w, Lambd):
     g = np.zeros((len(w), 1))
@@ -591,6 +613,44 @@ def admm_ridge_dist(set_up):
         vv = vv + xx - np.kron(z_ave.reshape(-1, 1), np.ones((1, nb)))
     return x_admm_dist
 
+def admm_tf(set_up,func_g,func_h):
+    # symbolic variable
+    w = tf.Variable(initial_value=np.zeros(set_up['d']+1).reshape(-1,1), dtype=tf.float32)
+    z = tf.Variable(initial_value=np.zeros(set_up['d']+1).reshape(-1,1), dtype=tf.float32)
+    b = tf.Variable(initial_value=np.zeros(set_up['d']+1).reshape(-1,1), dtype=tf.float32)
+    out_tf = []
+    Xtrain = set_up['Xtrain'][:,:set_up['d']+1]
+    Xtrain =  Xtrain.astype(np.float32)
+    Ytrain = np.array(set_up['ytrain'][:,0])
+    
+    #Since we are using the standard binary cross-entropy, the labels must be in the set [0,1]
+    Ytrain[Ytrain==-1] = 0
+    Ytrain = Ytrain.reshape(-1,1).astype(np.float32)
+    
+    learning_rate = set_up["mu_grad"]
+    epochs = set_up["Niter_train"]
+    lamb = set_up["Lambda"]
+    rho = set_up["ro"]
+    
+    def loss_lag(func_g,func_h,X,Y,w,z,b,lamb,rho):
+        return func_g(X,Y,w) + func_h(z,lamb) + tf.matmul(tf.transpose(b), w-z) + (rho/2)*tf.square(tf.norm(w - z))
+
+    #optimisation loop
+    for _ in range(epochs):
+        for _ in range(10):
+            with tf.GradientTape() as t:
+                loss = loss_lag(func_g,func_h,Xtrain,Ytrain,w,z,b,lamb,rho)
+            lw = t.gradient(loss, w)
+            w.assign_sub(learning_rate * lw)
+        for _ in range(10):
+            with tf.GradientTape() as t:
+                loss = loss_lag(func_g,func_h,Xtrain,Ytrain,w,z,b,lamb,rho)
+            lz = t.gradient(loss, z)
+            z.assign_sub(learning_rate * lz)
+        b.assign_add(rho*(w-z))
+        out_tf.append(w.numpy().flatten())
+    out_tf = np.r_[out_tf]
+    return out_tf
 
 def forward(W1, W2, b1, b2, y0, tipo):
     v1 = W1 @ y0 + b1
@@ -682,3 +742,15 @@ def plot_surface(
     ax.set_ylabel("Coefficient 2")
     ax.set_title("Error surface.")
     return S
+
+def make_graph(f, *args, logdir='logs'):
+    logdir = './%s/%s_graph'%(logdir, f.__name__)
+    writer = tf.summary.create_file_writer(logdir)
+    tf.summary.trace_on(graph=True)
+
+    tf.autograph.trace(f)
+    f(*args)
+    with writer.as_default():
+        tf.summary.trace_export(name="tf.function '%s'"%f.__name__,step=0)
+
+    tf.summary.trace_off()

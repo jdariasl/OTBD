@@ -1,0 +1,1180 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Symbolic computing for ML &#8212; Optimisation Techniques for Big Data Analysis course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/C8_01_Simbolic_computing';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="TF symbolic engine" href="C8_02_TF_for_symbolic_computing.html" />
+    <link rel="prev" title="Symbolic differentiation and computational graphs" href="intros/Ch8.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals of Optimization and First Order Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch2.html">Machine Learning Contextualisation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_1.html">Example_2_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_3.html">Example_2_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_5.html">Example_2_5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_6.html">Example_2_6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_7.html">Example_2_7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_8.html">Example_2_8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_2_9.html">Example_2_9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_2_1.html">Case_study_2_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_2_2.html">Case_study_2_2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch3.html">Review of Fundamentals of Convex Optimisation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_2.html">Example_3_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_4.html">Example_3_4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_5.html">Example_3_5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_3_6.html">Example_3_6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_3_1.html">Case_study_3_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_3_2.html">Case_study_3_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_3_1.html">Student_exam_oriented_ex_3_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_3_2.html">Student_exam_oriented_ex_3_2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch4.html">First Order Methods Applied to Neural Networks</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_1.html">Example_4_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_2.html">Example_4_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_3.html">Example_4_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_4_4.html">Example_4_4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_4_1.html">Case_study_4_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_4_2.html">Case_study_4_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_4_3.html">Case_study_4_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_4_4.html">Case_study_4_4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_4_5.html">Case_study_4_5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_4_6.html">Case_study_4_6</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Second Order Methods and Large Scale Optimisation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch5.html">Second Order Methods</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_5_2.html">Example_5_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_5_1.html">Case_study_5_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_5_2.html">Case_study_5_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_5_1.html">Student_exam_oriented_ex_5_1</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch6.html">Coordinate Descent Methods</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_6_1.html">Example_6_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_6_1.html">Case_study_6_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_6_2.html">Case_study_6_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_6_1.html">Student_exam_oriented_ex_6_1</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch7.html">Augmented Lagrangian Methods</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_7_2.html">Example_7_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_7_3.html">Example_7_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_7_4.html">Example_7_4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_7_1.html">Case_study_7_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_7_2.html">Case_study_7_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_7_3.html">Case_study_7_3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_7_4.html">Case_study_7_4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_7_1.html">Student_exam_oriented_ex_7_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_7_2.html">Student_exam_oriented_ex_7_2</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automatic differentiation and hyperparameter selection</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intros/Ch8.html">Symbolic differentiation and computational graphs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Symbolic computing for ML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C8_02_TF_for_symbolic_computing.html">TF symbolic engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_8_1.html">Example_8_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example_8_2.html">Example_8_2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_8_1.html">Case_study_8_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_8_1.html">Student_exam_oriented_ex_8_1</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/jdariasl/OTBD/blob/master/content/C8_01_Simbolic_computing.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jdariasl/OTBD" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jdariasl/OTBD/issues/new?title=Issue%20on%20page%20%2Fcontent/C8_01_Simbolic_computing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/C8_01_Simbolic_computing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Symbolic computing for ML</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-computer-algebra-system-cas">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> computer algebra system (CAS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graph">Computational graph</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-symbolic-computational-package-can-do-a-lot-of-things">A symbolic computational package can do a lot of things:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy-to-python-and-numpy"><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-to-obtain-the-gradient">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="symbolic-computing-for-ml">
+<h1>Symbolic computing for ML<a class="headerlink" href="#symbolic-computing-for-ml" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>--no-cache<span class="w"> </span>-O<span class="w"> </span>init.py<span class="w"> </span>-q<span class="w"> </span>https://raw.githubusercontent.com/jdariasl/OTBD/main/content/init.py
+<span class="kn">import</span> <span class="nn">init</span><span class="p">;</span> <span class="n">init</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">force_download</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sy</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="o">%</span><span class="k">load_ext</span> tensorboard
+<span class="n">sy</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The tensorboard extension is already loaded. To reload it, use:
+  %reload_ext tensorboard
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2.14.0&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;local/datasets/trilotropicos.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(150, 2)
+</pre></div>
+</div>
+<img alt="../_images/2e8b795093074d54cc1c3d282f240d392d701404fc7af910dc46ef1cdbda11cf.png" src="../_images/2e8b795093074d54cc1c3d282f240d392d701404fc7af910dc46ef1cdbda11cf.png" />
+</div>
+</div>
+<p><strong>Let’s define a simple loss function</strong></p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}({\bf{w}}) = \frac{1}{n}\sum_{i=1}^{n} ({\bf{w}}^T{\bf{x}}_i- y_i)^2 \]</div>
+<p>The gradient of <span class="math notranslate nohighlight">\(\mathcal{L}(\cdot)\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \mathcal{L}({\bf{w}}) = \frac{1}{n}\sum_{i=1}^{n} ({\bf{w}}^T{\bf{x}}_i -y_i ) {\bf{x}}_i\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
+
+
+<span class="k">def</span> <span class="nf">n_cost</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">n_grad</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">init_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">40</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">20</span><span class="o">-</span><span class="mi">10</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">n_cost</span><span class="p">,</span> <span class="n">init_t</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BFGS&quot;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">n_grad</span><span class="p">)</span>
+<span class="n">r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 2.74476625708012
+ hess_inv: array([[ 5.57513613, -1.09143751],
+       [-1.09143751,  0.23468758]])
+      jac: array([-1.19252074e-07, -6.09487721e-07])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 7
+      nit: 6
+     njev: 7
+   status: 0
+  success: True
+        x: array([12.68999806, -0.71805909])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="using-sympy-computer-algebra-system-cas">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> computer algebra system (CAS)<a class="headerlink" href="#using-sympy-computer-algebra-system-cas" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">sy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5fdf2e2d61a6176a962d7a0929cb547d2afa2258dbb2ce1237283221e5c90839.png" src="../_images/5fdf2e2d61a6176a962d7a0929cb547d2afa2258dbb2ce1237283221e5c90839.png" />
+</div>
+</div>
+<p>we can evaluate the expresion by providing concrete values for the symbolic variables</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a0e1ccc3fe257c1c744955804d99625eae3051c7b086a32819c9b766ac3b067d.png" src="../_images/a0e1ccc3fe257c1c744955804d99625eae3051c7b086a32819c9b766ac3b067d.png" />
+</div>
+</div>
+<p>and obtain numerical approximations of these values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6012faf1091d3fa7bcb34fd595d2cedbda446268e8f8f45ef9e1fd8d87790d85.png" src="../_images/6012faf1091d3fa7bcb34fd595d2cedbda446268e8f8f45ef9e1fd8d87790d85.png" />
+</div>
+</div>
+<p>a <strong>derivative</strong> can be seen as a function that inputs and expression and outputs another expression</p>
+<p>observe how we compute <span class="math notranslate nohighlight">\(\frac{\partial z}{\partial x}\)</span> and <span class="math notranslate nohighlight">\(\frac{\partial z}{\partial y}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/13f410ad079c371cc362b16ed611683530351281729420413386ef4163315f98.png" src="../_images/13f410ad079c371cc362b16ed611683530351281729420413386ef4163315f98.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0e4849370e205c6fec8054b18180cb11a792563a08ba23451b79c61251c344f3.png" src="../_images/0e4849370e205c6fec8054b18180cb11a792563a08ba23451b79c61251c344f3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">})</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5b66f3dfdc47412f6281b381612fa53de52b02e75d29c2465512cbd973bf22e5.png" src="../_images/5b66f3dfdc47412f6281b381612fa53de52b02e75d29c2465512cbd973bf22e5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">})</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cf9d68a9de41719dd498ce421ec868fc88d0654e7ea7abec04400b20cd92c7a7.png" src="../_images/cf9d68a9de41719dd498ce421ec868fc88d0654e7ea7abec04400b20cd92c7a7.png" />
+</div>
+</div>
+<p>How is this done?</p>
+</section>
+<section id="computational-graph">
+<h2>Computational graph<a class="headerlink" href="#computational-graph" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;local/imgs/ComputationalGraph.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/90ed381d278151cc1b9d4c00a85dfe38027e1f43746280242e1277649c05fc10.png" src="../_images/90ed381d278151cc1b9d4c00a85dfe38027e1f43746280242e1277649c05fc10.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;local/imgs/ComputationalGraph2.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/24b7b85fdfb937f21fdaed0addde605174ebf20fe5ee8af8b920ac29ba256c81.png" src="../_images/24b7b85fdfb937f21fdaed0addde605174ebf20fe5ee8af8b920ac29ba256c81.png" />
+</div>
+</div>
+<section id="a-symbolic-computational-package-can-do-a-lot-of-things">
+<h3>A symbolic computational package can do a lot of things:<a class="headerlink" href="#a-symbolic-computational-package-can-do-a-lot-of-things" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">expand</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e8f25e278627484b698de233a808a69e796f0ceefa0fa4de712f851a77703158.png" src="../_images/e8f25e278627484b698de233a808a69e796f0ceefa0fa4de712f851a77703158.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">8</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ebe5aff5caf3c978509526860fc9283af939ac378d4c58954d295e1d0057f5f5.png" src="../_images/ebe5aff5caf3c978509526860fc9283af939ac378d4c58954d295e1d0057f5f5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/33fbb80bb61851bb104eba43a5a7aad6835fd0d10a4373695398730ab1b85950.png" src="../_images/33fbb80bb61851bb104eba43a5a7aad6835fd0d10a4373695398730ab1b85950.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">)</span>
+<span class="n">sy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/00fb16a38ae1cab5d5a19c76d4bd9ff70d56ec84327c2951a7cc1d936df70eae.png" src="../_images/00fb16a38ae1cab5d5a19c76d4bd9ff70d56ec84327c2951a7cc1d936df70eae.png" />
+</div>
+</div>
+<p>differential equations, solving <span class="math notranslate nohighlight">\(\frac{df}{dt}=f(t)+t\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">,</span> <span class="n">C1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t C1&quot;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">sy</span><span class="o">.</span><span class="n">Function</span><span class="p">)</span>
+<span class="n">dydt</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">t</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">dydt</span><span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">)</span>
+<span class="n">eq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a5466e40fe1fca4a6c143bb68a4669657fa3774f2173c87a32d19a6ecee58426.png" src="../_images/a5466e40fe1fca4a6c143bb68a4669657fa3774f2173c87a32d19a6ecee58426.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yt</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">yt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ffa2dea42f42249eb7f556b74572bf0c24bb592426cd71fac03c22a089ebf241.png" src="../_images/ffa2dea42f42249eb7f556b74572bf0c24bb592426cd71fac03c22a089ebf241.png" />
+</div>
+</div>
+<p>systems of equations</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">solve</span> <span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/62860aab5ffa76783084a9402eaa557ec48b0ab32d5f3255cf86fda99e6bc168.png" src="../_images/62860aab5ffa76783084a9402eaa557ec48b0ab32d5f3255cf86fda99e6bc168.png" />
+</div>
+</div>
+</section>
+<section id="sympy-to-python-and-numpy">
+<h3><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code><a class="headerlink" href="#sympy-to-python-and-numpy" title="Permalink to this heading">#</a></h3>
+<p>See <a class="reference external" href="http://docs.sympy.org/latest/modules/numeric-computation.html">Sympy Numeric Computation</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">sy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">f</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/60afe6cfdd5a9c2bc149f4b6b54cf7bb24d4ecb559ffb4393870c32df13fbae9.png" src="../_images/60afe6cfdd5a9c2bc149f4b6b54cf7bb24d4ecb559ffb4393870c32df13fbae9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="mi">10</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/669a60a56adf7467f5ba052b9dd062d89604b36a225bf4927992418b84b20802.png" src="../_images/669a60a56adf7467f5ba052b9dd062d89604b36a225bf4927992418b84b20802.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="mi">10</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ac544c0385a8bdac19abdab44646506c5123b2d79954f6113c78cc3aae273692.png" src="../_images/ac544c0385a8bdac19abdab44646506c5123b2d79954f6113c78cc3aae273692.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">f1</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ac544c0385a8bdac19abdab44646506c5123b2d79954f6113c78cc3aae273692.png" src="../_images/ac544c0385a8bdac19abdab44646506c5123b2d79954f6113c78cc3aae273692.png" />
+</div>
+</div>
+<p>and a vectorized version</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ac544c0385a8bdac19abdab44646506c5123b2d79954f6113c78cc3aae273692.png" src="../_images/ac544c0385a8bdac19abdab44646506c5123b2d79954f6113c78cc3aae273692.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([49.72798944,  2.45464871,  4.57056   ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>the <em>lambdified</em> version is faster, and the vectorized one is even faster</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> sy.N(f.subs({x:10}))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>112 µs ± 884 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> f1(10)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.14 µs ± 7 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> [f1(i) for i in range(1000)]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.18 ms ± 14.6 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> f2(np.arange(1000))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.2 µs ± 93.1 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s remember the loss function we defined before:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}({\bf{w}}) = \frac{1}{n}\sum_{i=1}^{n} ({\bf{w}}^T{\bf{x}}_i- y_i)^2 \]</div>
+<p>The gradient of <span class="math notranslate nohighlight">\(\mathcal{L}(\cdot)\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\nabla \mathcal{L}({\bf{w}}) = \frac{1}{n}\sum_{i=1}^{n} ({\bf{w}}^T{\bf{x}}_i -y_i ) {\bf{x}}_i\]</div>
+</section>
+<section id="using-sympy-to-obtain-the-gradient">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.<a class="headerlink" href="#using-sympy-to-obtain-the-gradient" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">w0</span><span class="p">,</span><span class="n">w1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;w_0 w_1&quot;</span><span class="p">)</span>
+<span class="n">w0</span><span class="p">,</span><span class="n">w1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/56c56dc6687ed4631014d8dbb5cd02e0e665abc24a868e11e96559c723269a4d.png" src="../_images/56c56dc6687ed4631014d8dbb5cd02e0e665abc24a868e11e96559c723269a4d.png" />
+</div>
+</div>
+<p>we first obtain the cost expression for a few summation terms, so that we can print it out and understand it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">L</span> <span class="o">+=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">w0</span><span class="o">+</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">w1</span><span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">L</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a92cd4e1e1358c705a45941201370ab8a2e1d0e2082646c237f26a0e647a6e7c.png" src="../_images/a92cd4e1e1358c705a45941201370ab8a2e1d0e2082646c237f26a0e647a6e7c.png" />
+</div>
+</div>
+<p>we can now simplify the expression, using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> mechanics</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+<span class="n">L</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/419e7c2b3c2a378c25746a4c670ebeae36f14aceddd9f4e5f8fdf84a5dac16a9.png" src="../_images/419e7c2b3c2a378c25746a4c670ebeae36f14aceddd9f4e5f8fdf84a5dac16a9.png" />
+</div>
+</div>
+<p>we now build the full expression</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_regression_cost_expression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">expr_cost</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">expr_cost</span> <span class="o">+=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">w0</span><span class="o">+</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">w1</span><span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">expr_cost</span> <span class="o">=</span> <span class="n">expr_cost</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">expr_cost</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">expr_cost</span> <span class="o">=</span> <span class="n">build_regression_cost_expression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">expr_cost</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3adb568896a9fc7ca785167cc679ea56e846b0fd342b4ce71431d45620576b98.png" src="../_images/3adb568896a9fc7ca785167cc679ea56e846b0fd342b4ce71431d45620576b98.png" />
+</div>
+</div>
+<p>obtain derivatives symbolically</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr_dw0</span> <span class="o">=</span> <span class="n">expr_cost</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">w0</span><span class="p">)</span>
+<span class="n">expr_dw1</span> <span class="o">=</span> <span class="n">expr_cost</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span>
+<span class="n">expr_dw0</span><span class="p">,</span> <span class="n">expr_dw1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0e42b242a85c77665b436a3d65355e43ba46cf3339914322decd3976c3992839.png" src="../_images/0e42b242a85c77665b436a3d65355e43ba46cf3339914322decd3976c3992839.png" />
+</div>
+</div>
+<p>and obtain regular Python so that we can use them in optimization</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_cost</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([[</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">]],</span> <span class="n">expr_cost</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+
+<span class="n">d0</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([[</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">]],</span> <span class="n">expr_dw0</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([[</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">]],</span> <span class="n">expr_dw1</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="n">s_grad</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">d0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">d1</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and now we can minimize</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">s_cost</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">jac</span><span class="o">=</span><span class="n">s_grad</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BFGS&quot;</span><span class="p">)</span>
+<span class="n">r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 2.7447662570799594
+ hess_inv: array([[ 5.57425906, -1.09086733],
+       [-1.09086733,  0.23434848]])
+      jac: array([-1.73778293e-07, -9.26928138e-07])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 10
+      nit: 9
+     njev: 10
+   status: 0
+  success: True
+        x: array([12.6899981, -0.7180591])
+</pre></div>
+</div>
+</div>
+</div>
+<p>observe that hand derived functions and the ones obtained by <code class="docutils literal notranslate"><span class="pre">sympy</span></code> evaluate to the same values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="mi">10</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">4</span><span class="o">-</span><span class="mi">3</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">]</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;theta:&quot;</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;cost analytic:&quot;</span><span class="p">,</span> <span class="n">n_cost</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;cost symbolic:&quot;</span><span class="p">,</span> <span class="n">s_cost</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;gradient analytic:&quot;</span><span class="p">,</span> <span class="n">n_grad</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;gradient symbolic:&quot;</span><span class="p">,</span> <span class="n">s_grad</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta: [14.35986113 -2.46039072]
+cost analytic: 50.580711344683486
+cost symbolic: 50.58071134468287
+gradient analytic: [-12.86378994 -67.23901186]
+gradient symbolic: [-12.86378994 -67.23901186]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intros/Ch8.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Symbolic differentiation and computational graphs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="C8_02_TF_for_symbolic_computing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">TF symbolic engine</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-computer-algebra-system-cas">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> computer algebra system (CAS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graph">Computational graph</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-symbolic-computational-package-can-do-a-lot-of-things">A symbolic computational package can do a lot of things:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy-to-python-and-numpy"><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-to-obtain-the-gradient">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Julián D. Arias-Londoño
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

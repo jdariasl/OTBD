@@ -64,5 +64,15 @@ parts:
       - file: content/Case_study_7_4
       - file: content/Student_exam_oriented_ex_7_1
       - file: content/Student_exam_oriented_ex_7_2
+  - caption: Automatic differentiation and hyperparameter selection
+    chapters:
+    - file: content/intros/Ch8
+      sections:
+      - file: content/C8_01_Simbolic_computing
+      - file: content/C8_02_TF_for_symbolic_computing
+      - file: content/Example_8_1
+      - file: content/Example_8_2
+      - file: content/Case_study_8_1
+      - file: content/Student_exam_oriented_ex_8_1
 
 
