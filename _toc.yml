@@ -74,5 +74,9 @@ parts:
       - file: content/Example_8_2
       - file: content/Case_study_8_1
       - file: content/Student_exam_oriented_ex_8_1
+    - file: content/intros/Ch9
+      sections:
+      - file: content/Example_9_1
+      - file: content/Case_study_9_1
 
 
