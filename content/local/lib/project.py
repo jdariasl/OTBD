@@ -46,21 +46,6 @@ def project_sel(name):
         )
     )
     print(
-        "You must chose three algorithms to solve the problem (one for each of the following items):\n"
-    )
-    print(
-        "* "
-        + "Gradient/subgradient descent with constant/decay learning rate; accelerated gradient/subgradient descent; proximal grandient descent\n"
-    )
-    print(
-        "* "
-        + "Conjugate gradient descend; BFGS; Block coordinate descent assuming, at least, 2 nodes\n"
-    )
-    print("* " + "Distributed ADMM assuming, at least, 2 nodes\n")
-    print(
-        "Note that not all the algorithms are suitable for all the problems, so the selection must be done carefully.\n"
-    )
-    print(
         "The global number of iterations for each algorithm is {Niter}.\n".format(
             Niter=Niter
         )
@@ -70,26 +55,5 @@ def project_sel(name):
             lambd=lambd, ro=ro
         )
     )
-    print(
-        "Note that the values provided for the number of iterations, regularization parameter and rho are orientative, and the student must find a good hyperparameter set that solves adequatelly its problem. You can also use Bayesian optimization to find the best hyperparameters.\n"
-    )
-    print(
-        "The student must provide this python notebook adding the following information:\n"
-    )
-    print("* " + "A description of the problem and the dataset used.\n")
-    print("* " + "A description of each algorithm chosen.\n")
-    print("* " + "The code commented.\n")
-    print(
-        "* "
-        + "The results obtained and comment these results, including the advantages and disadvantages of each algorithm used. Use as many graphs and block diagrams as needed.\n"
-    )
-    print(
-        "A fully executable python notebook, as well as its pdf version, must be uploaded to Moodle before the final exam.\n"
-    )
-    print("The evaluation will be done according to the following criteria:\n")
-    print("* " + "Project acomplishment.\n")
-    print("* " + "Correctness of the results.\n")
-    print("* " + "Quality of the results discussions.\n")
-    print("* " + "Correctness of the code.\n")
-    print("* " + "Quality of the comments.\n")
+
     return X, y
