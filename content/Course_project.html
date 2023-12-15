@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Optimisation Techniques for Big Data Analysis course</title>
+    <title>Instructions for project development &#8212; Optimisation Techniques for Big Data Analysis course</title>
   
   
   
@@ -439,9 +439,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -452,19 +450,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Instructions for project development</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -490,6 +480,19 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="instructions-for-project-development">
+<h1>Instructions for project development<a class="headerlink" href="#instructions-for-project-development" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Set the Name variable in the following cell with your full name and run the cell. You will be given a specific dataset and model to train.</p></li>
+<li><p>You must chose three algorithms to solve the problem (one for each of the following items):</p>
+<ul>
+<li><p>Gradient/subgradient descent with constant/decay learning rate; accelerated gradient/subgradient descent; proximal grandient descent</p></li>
+<li><p>Conjugate gradient descend; BFGS; Block coordinate descent assuming, at least, 2 nodes</p></li>
+<li><p>Distributed ADMM assuming, at least, 2 nodes</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong> that not all the algorithms are suitable for all the problems, so the selection must be done carefully.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Set name variable with your full name.</span>
@@ -501,49 +504,32 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Use the data set of the classification problem given to you to train a SVM model.
 
-You must chose three algorithms to solve the problem (one for each of the following items):
-
-* Gradient/subgradient descent with constant/decay learning rate; accelerated gradient/subgradient descent; proximal grandient descent
-
-* Conjugate gradient descend; BFGS; Block coordinate descent assuming, at least, 2 nodes
-
-* Distributed ADMM assuming, at least, 2 nodes
-
-Note that not all the algorithms are suitable for all the problems, so the selection must be done carefully.
-
 The global number of iterations for each algorithm is 1000.
 
 Use an initial regularization parameter of 0.01 for the regularization terms and 10 for the rho quadratic term in ADMM.
-
-Note that the values provided for the number of iterations, regularization parameter and rho are orientative, and the student must find a good hyperparameter set that solves adequatelly its problem. You can also use Bayesian optimization to find the best hyperparameters.
-
-The student must provide this python notebook adding the following information:
-
-* A description of the problem and the dataset used.
-
-* A description of each algorithm chosen.
-
-* The code commented.
-
-* The results obtained and comment these results, including the advantages and disadvantages of each algorithm used. Use as many graphs and block diagrams as needed.
-
-A fully executable python notebook, as well as its pdf version, must be uploaded to Moodle before the final exam.
-
-The evaluation will be done according to the following criteria:
-
-* Project acomplishment.
-
-* Correctness of the results.
-
-* Quality of the results discussions.
-
-* Correctness of the code.
-
-* Quality of the comments.
 </pre></div>
 </div>
 </div>
 </div>
+<div class="alert alert-block alert-warning">
+<b>Note:</b> that the values provided for the number of iterations, regularization parameter and rho are orientative, and the student must find a good hyperparameter set that solves adequatelly its problem. You can also use Bayesian optimization to find the best hyperparameters.
+</div>
+<p>The student must provide this python notebook adding the following information:</p>
+<ul class="simple">
+<li><p>A description of the problem and the dataset used.</p></li>
+<li><p>A description of each algorithm chosen.</p></li>
+<li><p>The code commented.</p></li>
+<li><p>The results obtained and comment these results, including the advantages and disadvantages of each algorithm used. Use as many graphs and block diagrams as needed.</p></li>
+</ul>
+<p>A fully executable python notebook, as well as its pdf version, must be uploaded to Moodle before the final exam.</p>
+<p>The evaluation will be done according to the following criteria:</p>
+<ul class="simple">
+<li><p>Project acomplishment.</p></li>
+<li><p>Correctness of the results.</p></li>
+<li><p>Quality of the results discussions.</p></li>
+<li><p>Correctness of the code.</p></li>
+<li><p>Quality of the comments.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
@@ -561,6 +547,7 @@ The evaluation will be done according to the following criteria:
 </div>
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -602,20 +589,6 @@ The evaluation will be done according to the following criteria:
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
