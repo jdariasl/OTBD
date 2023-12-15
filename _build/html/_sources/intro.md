@@ -34,7 +34,7 @@ This course delves into the fundamental concepts and theoretical underpinnings o
 
 ----
 ### Course's project
-- [Intructions](content/Course_project.ipynb)
+- [Instructions](content/Course_project.ipynb)
 
 ---
 
