@@ -34,5 +34,9 @@ This course delves into the fundamental concepts and theoretical underpinnings o
 
 ----
 
+- [Course's project](content/Course_project.ipynb)
+
+---
+
 [Download a ZIP file with the course's notebooks](https://github.com/jdariasl/OTBD/archive/main.zip)
 
