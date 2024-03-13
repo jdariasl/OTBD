@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Course_project';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -486,9 +488,9 @@ document.write(`
 <li><p>Set the Name variable in the following cell with your full name and run the cell. You will be given a specific dataset and model to train.</p></li>
 <li><p>You must chose three algorithms to solve the problem (one for each of the following items):</p>
 <ul>
-<li><p>Gradient/subgradient descent with constant/decay learning rate; accelerated gradient/subgradient descent; proximal grandient descent</p></li>
+<li><p>Accelerated gradient/subgradient descent; proximal grandient descent</p></li>
 <li><p>Conjugate gradient descend; BFGS; Block coordinate descent assuming, at least, 2 nodes</p></li>
-<li><p>Distributed ADMM assuming, at least, 2 nodes</p></li>
+<li><p>Distributed ADMM assuming, at least, 2 nodes. To find the solution for the <span class="math notranslate nohighlight">\(\bf{x}\)</span> term (see slides 83 and 84 of Ch 7.) in every iteration of the ADMM you must compare a) An exact (when possible) or gradient-based solution and b) The same algorithm chosen in the previous item. You must set the number of iterations for the inner loop of the gradient-based solutions (GD, CGD, BCD).</p></li>
 </ul>
 </li>
 </ul>
