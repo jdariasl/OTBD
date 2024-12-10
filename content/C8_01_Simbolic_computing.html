@@ -237,6 +237,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_8_1.html">Student_exam_oriented_ex_8_1</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch9.html">Introduction to Bayesian Optimisation</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_9_1.html">Example_9_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_9_1.html">Case_study_9_1</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -461,13 +466,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-simple-loss-function">Let’s define a simple loss function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-computer-algebra-system-cas">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> computer algebra system (CAS)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graph">Computational graph</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-symbolic-computational-package-can-do-a-lot-of-things">A symbolic computational package can do a lot of things:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy-to-python-and-numpy"><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-to-obtain-the-gradient">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy-to-python-and-numpy"><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-to-obtain-the-gradient">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.</a></li>
 </ul>
             </nav>
         </div>
@@ -502,8 +508,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The tensorboard extension is already loaded. To reload it, use:
-  %reload_ext tensorboard
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-12-10 17:19:50.860339: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2.14.0&#39;
@@ -539,7 +545,8 @@ document.write(`
 <img alt="../_images/2e8b795093074d54cc1c3d282f240d392d701404fc7af910dc46ef1cdbda11cf.png" src="../_images/2e8b795093074d54cc1c3d282f240d392d701404fc7af910dc46ef1cdbda11cf.png" />
 </div>
 </div>
-<p><strong>Let’s define a simple loss function</strong></p>
+<section id="let-s-define-a-simple-loss-function">
+<h2>Let’s define a simple loss function<a class="headerlink" href="#let-s-define-a-simple-loss-function" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}({\bf{w}}) = \frac{1}{n}\sum_{i=1}^{n} ({\bf{w}}^T{\bf{x}}_i- y_i)^2 \]</div>
 <p>The gradient of <span class="math notranslate nohighlight">\(\mathcal{L}(\cdot)\)</span> is:</p>
@@ -564,21 +571,22 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 2.74476625708012
- hess_inv: array([[ 5.57513613, -1.09143751],
-       [-1.09143751,  0.23468758]])
-      jac: array([-1.19252074e-07, -6.09487721e-07])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 2.7447662570809355
+ hess_inv: array([[ 5.49985723, -1.07531773],
+       [-1.07531773,  0.23126819]])
+      jac: array([-2.44934669e-08,  2.52831629e-06])
   message: &#39;Optimization terminated successfully.&#39;
-     nfev: 7
-      nit: 6
-     njev: 7
+     nfev: 10
+      nit: 9
+     njev: 10
    status: 0
   success: True
-        x: array([12.68999806, -0.71805909])
+        x: array([12.68999516, -0.71805846])
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="using-sympy-computer-algebra-system-cas">
 <h2>Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> computer algebra system (CAS)<a class="headerlink" href="#using-sympy-computer-algebra-system-cas" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -608,6 +616,16 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/a0e1ccc3fe257c1c744955804d99625eae3051c7b086a32819c9b766ac3b067d.png" src="../_images/a0e1ccc3fe257c1c744955804d99625eae3051c7b086a32819c9b766ac3b067d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/887fa233aedee453d4832c2b01e457919f3d7cb1ff5da770aaa5902cff1062c7.png" src="../_images/887fa233aedee453d4832c2b01e457919f3d7cb1ff5da770aaa5902cff1062c7.png" />
 </div>
 </div>
 <p>and obtain numerical approximations of these values</p>
@@ -676,7 +694,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90ed381d278151cc1b9d4c00a85dfe38027e1f43746280242e1277649c05fc10.png" src="../_images/90ed381d278151cc1b9d4c00a85dfe38027e1f43746280242e1277649c05fc10.png" />
+<img alt="../_images/e3e4d6e9db8aeafe68ed2d5589f945120c3351514dfc474503c581fdec10488f.png" src="../_images/e3e4d6e9db8aeafe68ed2d5589f945120c3351514dfc474503c581fdec10488f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -770,8 +788,9 @@ document.write(`
 </div>
 </div>
 </section>
+</section>
 <section id="sympy-to-python-and-numpy">
-<h3><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code><a class="headerlink" href="#sympy-to-python-and-numpy" title="Permalink to this heading">#</a></h3>
+<h2><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code><a class="headerlink" href="#sympy-to-python-and-numpy" title="Permalink to this heading">#</a></h2>
 <p>See <a class="reference external" href="http://docs.sympy.org/latest/modules/numeric-computation.html">Sympy Numeric Computation</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -853,7 +872,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>112 µs ± 884 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>124 µs ± 3.06 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -865,7 +884,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.14 µs ± 7 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.28 µs ± 66.1 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -877,7 +896,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.18 ms ± 14.6 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.37 ms ± 20.6 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -889,7 +908,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.2 µs ± 93.1 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.8 µs ± 471 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -902,7 +921,7 @@ document.write(`
 \[\nabla \mathcal{L}({\bf{w}}) = \frac{1}{n}\sum_{i=1}^{n} ({\bf{w}}^T{\bf{x}}_i -y_i ) {\bf{x}}_i\]</div>
 </section>
 <section id="using-sympy-to-obtain-the-gradient">
-<h3>Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.<a class="headerlink" href="#using-sympy-to-obtain-the-gradient" title="Permalink to this heading">#</a></h3>
+<h2>Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.<a class="headerlink" href="#using-sympy-to-obtain-the-gradient" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="o">.</span><span class="n">values</span>
@@ -1037,17 +1056,30 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta: [14.35986113 -2.46039072]
-cost analytic: 50.580711344683486
-cost symbolic: 50.58071134468287
-gradient analytic: [-12.86378994 -67.23901186]
-gradient symbolic: [-12.86378994 -67.23901186]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta: [10.98668483  0.37723461]
+cost analytic: 16.790694513357096
+cost symbolic: 16.790694513357067
+gradient analytic: [ 6.77949907 36.19071996]
+gradient symbolic: [ 6.77949907 36.19071996]
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-</section>
+<div class="alert alert-block alert-success"><b>Problems of CAS por Deep Learning</b>
+<ul class="simple">
+<li><p>Expression swell</p></li>
+<li><p>Multidimensional vector-valued functions require additional contructs beyond algebraic expressions:</p>
+<ul>
+<li><p>Gradient</p></li>
+<li><p>Jacobian</p></li>
+<li><p>Hessian</p></li>
+<li><p>Jacobian vector products (jvp): <span class="math notranslate nohighlight">\(J_g(\theta){\bf v}\)</span></p></li>
+<li><p>Vector jacobian products (vjp): <span class="math notranslate nohighlight">\({\bf u}^\top J_g(\theta)\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>The partial derivatives are mainly built on top of jvp and vjp operators. <strong>Note</strong> that <span class="math notranslate nohighlight">\(\frac{\partial g}{\partial \theta_i}\)</span> is just the <span class="math notranslate nohighlight">\(i\)</span>-column vector of the Jacobian, or the jvp when the vector <span class="math notranslate nohighlight">\({\bf v} = [0,\cdots,i,\cdots,0]\)</span> where <span class="math notranslate nohighlight">\(i=1\)</span>, or, even more efficiently using vjp.</p>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1117,13 +1149,14 @@ gradient symbolic: [-12.86378994 -67.23901186]
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-simple-loss-function">Let’s define a simple loss function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-computer-algebra-system-cas">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> computer algebra system (CAS)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graph">Computational graph</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-symbolic-computational-package-can-do-a-lot-of-things">A symbolic computational package can do a lot of things:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy-to-python-and-numpy"><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-to-obtain-the-gradient">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sympy-to-python-and-numpy"><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> to <code class="docutils literal notranslate"><span class="pre">Python</span></code> and <code class="docutils literal notranslate"><span class="pre">Numpy</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-sympy-to-obtain-the-gradient">Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient.</a></li>
 </ul>
   </nav></div>
 

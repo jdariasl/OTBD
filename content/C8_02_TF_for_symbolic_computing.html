@@ -237,6 +237,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Student_exam_oriented_ex_8_1.html">Student_exam_oriented_ex_8_1</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intros/Ch9.html">Introduction to Bayesian Optimisation</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Example_9_1.html">Example_9_1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Case_study_9_1.html">Case_study_9_1</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -472,7 +477,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-6-custom-model-with-keras-class-api-and-standard-loop">Version 6: Custom model with Keras <code class="docutils literal notranslate"><span class="pre">class</span></code> API  and standard loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-7-using-train-step-rightarrow-control-loss-and-gradients-on-a-custom-model">Version 7: Using <code class="docutils literal notranslate"><span class="pre">train_step</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control loss and gradients on a custom model.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-8-using-train-step-rightarrow-control-loss-and-gradients-on-a-standard-model">Version 8: Using <code class="docutils literal notranslate"><span class="pre">train_step</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control loss and gradients on a standard model.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-9-using-train-on-batch-rightarrow-control-data">Version 9: using <code class="docutils literal notranslate"><span class="pre">train_on_batch</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-9-using-train-on-batch-rightarrow-control-data">Version 9: using <code class="docutils literal notranslate"><span class="pre">train_on_batch</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-we-can-still-have-access-to-gradients-with-respect-to-the-any-of-the-layers-in-the-computational-graph-if-connected">Note that we can still have access to gradients with respect to the any of the layers in the Computational Graph (if connected)</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -511,7 +519,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-10-18 18:21:48.852776: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-12-10 17:51:54.117859: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -562,8 +570,7 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">(</span><span class="n">persistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">3</span>
     
-<span class="nb">print</span> <span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-    
+<span class="nb">print</span> <span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> 
 </pre></div>
 </div>
 </div>
@@ -618,7 +625,7 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.eager.polymorphic_function.polymorphic_function.Function object at 0x7fe930b92a00&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.eager.polymorphic_function.polymorphic_function.Function object at 0x7fce22dc06d0&gt;
 </pre></div>
 </div>
 </div>
@@ -631,11 +638,11 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-      <iframe id="tensorboard-frame-8baee2400cdafede" width="100%" height="800" frameborder="0">
+      <iframe id="tensorboard-frame-e6a6c7bc14220809" width="100%" height="800" frameborder="0">
       </iframe>
       <script>
         (function() {
-          const frame = document.getElementById("tensorboard-frame-8baee2400cdafede");
+          const frame = document.getElementById("tensorboard-frame-e6a6c7bc14220809");
           const url = new URL("/", window.location);
           const port = 6006;
           if (port) {
@@ -694,6 +701,22 @@ array([[-38.      ],
 </div>
 </div>
 </div>
+<p><strong>Note</strong> that you can also estimate derivatives with respect to data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(3, 2), dtype=float32, numpy=
+array([[ 8.      , -4.      ],
+       [ 9.333334, -4.666667],
+       [ 8.      , -4.      ]], dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="implementing-linear-regresion-in-tf">
 <h2>Implementing linear regresion in TF<a class="headerlink" href="#implementing-linear-regresion-in-tf" title="Permalink to this heading">#</a></h2>
@@ -706,12 +729,15 @@ array([[-38.      ],
 <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(150, 1) (150,)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;densidad_escamas&#39;)
 </pre></div>
 </div>
 <img alt="../_images/2e8b795093074d54cc1c3d282f240d392d701404fc7af910dc46ef1cdbda11cf.png" src="../_images/2e8b795093074d54cc1c3d282f240d392d701404fc7af910dc46ef1cdbda11cf.png" />
@@ -768,10 +794,10 @@ array([[-38.      ],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4000/4000 [00:07&lt;00:00, 524.88it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████| 4000/4000 [00:07&lt;00:00, 500.94it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12.678487] [[-0.7157973]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12.678262] [[-0.7157532]]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -793,7 +819,7 @@ array([[-38.      ],
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 50.0)
 </pre></div>
 </div>
-<img alt="../_images/8bf2b954b9c4e8178526643f39ddf9fd421b77ccd8115cef2753e09c6f2f40d5.png" src="../_images/8bf2b954b9c4e8178526643f39ddf9fd421b77ccd8115cef2753e09c6f2f40d5.png" />
+<img alt="../_images/f2d68eb049f39a1f4ebd6e0be371aa6116efe01f3fddbb437c275c9bed4bb516.png" src="../_images/f2d68eb049f39a1f4ebd6e0be371aa6116efe01f3fddbb437c275c9bed4bb516.png" />
 </div>
 </div>
 </section>
@@ -833,10 +859,10 @@ array([[-38.      ],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4000/4000 [00:04&lt;00:00, 840.83it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████| 4000/4000 [00:04&lt;00:00, 816.77it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12.6763935] [[-0.7153859]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12.677817] [[-0.7156658]]
 </pre></div>
 </div>
 </div>
@@ -857,7 +883,7 @@ array([[-38.      ],
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 50.0)
 </pre></div>
 </div>
-<img alt="../_images/3248746f600937a8eb912b689a6bb003a69a54ea9323d0d899fa5b568ac89a85.png" src="../_images/3248746f600937a8eb912b689a6bb003a69a54ea9323d0d899fa5b568ac89a85.png" />
+<img alt="../_images/1ac7e57a69f20b312e7c6472d65aa57047a97eb1ae0776ef64e20cd94997031f.png" src="../_images/1ac7e57a69f20b312e7c6472d65aa57047a97eb1ae0776ef64e20cd94997031f.png" />
 </div>
 </div>
 </section>
@@ -897,10 +923,10 @@ array([[-38.      ],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:04&lt;00:00, 85.38it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████| 400/400 [00:04&lt;00:00, 82.22it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12.667722] [[-0.71434104]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[12.660541] [[-0.7387967]]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -924,7 +950,7 @@ array([[-38.      ],
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 50.0)
 </pre></div>
 </div>
-<img alt="../_images/ce22c84988948cef104a50f3ef2628d8ecc26eefd346ccd711e47f1aead98a30.png" src="../_images/ce22c84988948cef104a50f3ef2628d8ecc26eefd346ccd711e47f1aead98a30.png" />
+<img alt="../_images/95a3a1c2d177703432a8340ec1a13ea3108fe61b8e857509e7ac163224c24db3.png" src="../_images/95a3a1c2d177703432a8340ec1a13ea3108fe61b8e857509e7ac163224c24db3.png" />
 </div>
 </div>
 </section>
@@ -992,8 +1018,8 @@ array([[-38.      ],
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(2, 1), dtype=float32, numpy=
-array([[-0.14747247],
-       [-0.119949  ]], dtype=float32)&gt;
+array([[0.1035429 ],
+       [0.08904369]], dtype=float32)&gt;
 </pre></div>
 </div>
 </div>
@@ -1006,11 +1032,11 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - 0s 60ms/step
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - 0s 77ms/step
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.14747247],
-       [-0.119949  ]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.1035429 ],
+       [0.08904369]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -1022,8 +1048,8 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;linear_regression_model4_2/Variable:0&#39; shape=(1, 1) dtype=float32, numpy=array([[-0.01655438]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;linear_regression_model4_2/Variable:0&#39; shape=(1,) dtype=float32, numpy=array([-0.08428116], dtype=float32)&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;linear_regression_model4/Variable:0&#39; shape=(1, 1) dtype=float32, numpy=array([[0.00872076]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;linear_regression_model4/Variable:0&#39; shape=(1,) dtype=float32, numpy=array([0.07025407], dtype=float32)&gt;]
 </pre></div>
 </div>
 </div>
@@ -1035,7 +1061,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[-0.01655438]], dtype=float32), array([-0.08428116], dtype=float32)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0.00872076]], dtype=float32), array([0.07025407], dtype=float32)]
 </pre></div>
 </div>
 </div>
@@ -1048,7 +1074,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:04&lt;00:00, 81.99it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████| 400/400 [00:05&lt;00:00, 76.43it/s]
 </pre></div>
 </div>
 </div>
@@ -1060,7 +1086,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([12.6649475], dtype=float32), array([[-0.6100817]], dtype=float32))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([12.670298], dtype=float32), array([[-0.7236754]], dtype=float32))
 </pre></div>
 </div>
 </div>
@@ -1081,7 +1107,7 @@ array([[-0.14747247],
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 50.0)
 </pre></div>
 </div>
-<img alt="../_images/6ed7a01af7fd265a588f53ca20d6b8660d52e7801c8eea7476bb513c1eab0cf9.png" src="../_images/6ed7a01af7fd265a588f53ca20d6b8660d52e7801c8eea7476bb513c1eab0cf9.png" />
+<img alt="../_images/374790e148ede6b80519d2e27eab0ee0de4a52c76462bb6e44e2d1d0a28b7876.png" src="../_images/374790e148ede6b80519d2e27eab0ee0de4a52c76462bb6e44e2d1d0a28b7876.png" />
 </div>
 </div>
 </section>
@@ -1135,8 +1161,8 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_5/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[-0.6312059]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;dense_5/bias:0&#39; shape=(1,) dtype=float32, numpy=array([12.774989], dtype=float32)&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[-0.32406986]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense/bias:0&#39; shape=(1,) dtype=float32, numpy=array([11.694233], dtype=float32)&gt;]
 </pre></div>
 </div>
 </div>
@@ -1168,7 +1194,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3916d6162d2ea21fe19b9ebeae19892dbfe223af1df8af50a1f6274f3f03a447.png" src="../_images/3916d6162d2ea21fe19b9ebeae19892dbfe223af1df8af50a1f6274f3f03a447.png" />
+<img alt="../_images/1b2f97fd825242923bb51e195880e77f4fd184dcb700efe5f84df5439551d092.png" src="../_images/1b2f97fd825242923bb51e195880e77f4fd184dcb700efe5f84df5439551d092.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1184,7 +1210,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/670ac83cee609c7b8090ca27ce60d20037ee25ffa039b21680aa87542631eb73.png" src="../_images/670ac83cee609c7b8090ca27ce60d20037ee25ffa039b21680aa87542631eb73.png" />
+<img alt="../_images/c6db41046fb3f310f2b2b8be259e702bb07a707fbf101f796ab1058e07415aed.png" src="../_images/c6db41046fb3f310f2b2b8be259e702bb07a707fbf101f796ab1058e07415aed.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1194,15 +1220,15 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reusing TensorBoard on port 6006 (pid 47595), started 16:14:07 ago. (Use &#39;!kill 47595&#39; to kill it.)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reusing TensorBoard on port 6006 (pid 71551), started 0:22:34 ago. (Use &#39;!kill 71551&#39; to kill it.)
 </pre></div>
 </div>
 <div class="output text_html">
-      <iframe id="tensorboard-frame-b900f40576e99c1b" width="100%" height="800" frameborder="0">
+      <iframe id="tensorboard-frame-eb740c2b5ef8b57b" width="100%" height="800" frameborder="0">
       </iframe>
       <script>
         (function() {
-          const frame = document.getElementById("tensorboard-frame-b900f40576e99c1b");
+          const frame = document.getElementById("tensorboard-frame-eb740c2b5ef8b57b");
           const url = new URL("/", window.location);
           const port = 6006;
           if (port) {
@@ -1258,7 +1284,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.History at 0x7fe918536a30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.History at 0x7fce31557c40&gt;
 </pre></div>
 </div>
 </div>
@@ -1271,7 +1297,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([13.017648], dtype=float32), array([-0.7233677], dtype=float32))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([11.829514], dtype=float32), array([-0.68691593], dtype=float32))
 </pre></div>
 </div>
 </div>
@@ -1290,7 +1316,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dc545bd502e7b65e5bbcca5d9262a6f61560035e5b57291313eb2dd10a4dbc29.png" src="../_images/dc545bd502e7b65e5bbcca5d9262a6f61560035e5b57291313eb2dd10a4dbc29.png" />
+<img alt="../_images/94b83a6478f1de05966e4be68248f6053a70bda2079fa5dcaebce36d9c214cb9.png" src="../_images/94b83a6478f1de05966e4be68248f6053a70bda2079fa5dcaebce36d9c214cb9.png" />
 </div>
 </div>
 </section>
@@ -1345,7 +1371,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.History at 0x7fe969b2e6d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.History at 0x7fce23215fd0&gt;
 </pre></div>
 </div>
 </div>
@@ -1357,7 +1383,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[-0.67465234]], dtype=float32), array([12.980438], dtype=float32)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[-0.49167478]], dtype=float32), array([11.938187], dtype=float32)]
 </pre></div>
 </div>
 </div>
@@ -1376,7 +1402,7 @@ array([[-0.14747247],
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05f55dd036f4f6f93c58eda87c57e04d439d5ac73186ac4438e8db82a28dfd2b.png" src="../_images/05f55dd036f4f6f93c58eda87c57e04d439d5ac73186ac4438e8db82a28dfd2b.png" />
+<img alt="../_images/b10c0899c4349b358c559ad4fcb6cc612129b3fd7ab7afb9c234924c138e128e.png" src="../_images/b10c0899c4349b358c559ad4fcb6cc612129b3fd7ab7afb9c234924c138e128e.png" />
 </div>
 </div>
 </section>
@@ -1442,7 +1468,7 @@ _________________________________________________________________
 =================================================================
  input_1 (InputLayer)        [(None, 1)]               0         
                                                                  
- dense_6 (Dense)             (None, 1)                 2         
+ dense_1 (Dense)             (None, 1)                 2         
                                                                  
 =================================================================
 Total params: 2 (8.00 Byte)
@@ -1460,8 +1486,8 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_6/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[1.137009]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;dense_6/bias:0&#39; shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[1.5373226]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_1/bias:0&#39; shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
 </pre></div>
 </div>
 </div>
@@ -1473,8 +1499,8 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_6/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[1.137009]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;dense_6/bias:0&#39; shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[1.5373226]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_1/bias:0&#39; shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
 </pre></div>
 </div>
 </div>
@@ -1486,7 +1512,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.History at 0x7fe95959cac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.History at 0x7fce315a8ac0&gt;
 </pre></div>
 </div>
 </div>
@@ -1498,8 +1524,8 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_6/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[-0.9636562]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;dense_6/bias:0&#39; shape=(1,) dtype=float32, numpy=array([12.985804], dtype=float32)&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[-0.5964833]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_1/bias:0&#39; shape=(1,) dtype=float32, numpy=array([11.866811], dtype=float32)&gt;]
 </pre></div>
 </div>
 </div>
@@ -1518,7 +1544,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8a302e51524699c72fec37691e43c38a1f09553de197b6015c5b81ba68241ed9.png" src="../_images/8a302e51524699c72fec37691e43c38a1f09553de197b6015c5b81ba68241ed9.png" />
+<img alt="../_images/2365d097f0b6801d5966508024b8a4da912b25fc3b83363742cc2cddcb1f1c17.png" src="../_images/2365d097f0b6801d5966508024b8a4da912b25fc3b83363742cc2cddcb1f1c17.png" />
 </div>
 </div>
 </section>
@@ -1547,7 +1573,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:48&lt;00:00,  8.22it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████| 400/400 [00:48&lt;00:00,  8.28it/s]
 </pre></div>
 </div>
 </div>
@@ -1559,8 +1585,8 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_7/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[-0.15614377]], dtype=float32)&gt;,
- &lt;tf.Variable &#39;dense_7/bias:0&#39; shape=(1,) dtype=float32, numpy=array([9.998391], dtype=float32)&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Variable &#39;dense_2/kernel:0&#39; shape=(1, 1) dtype=float32, numpy=array([[-0.17166868]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_2/bias:0&#39; shape=(1,) dtype=float32, numpy=array([10.048985], dtype=float32)&gt;]
 </pre></div>
 </div>
 </div>
@@ -1577,9 +1603,29 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b957bcdff4ad9078d4a9daf5e94145500fd94c4a6ca4ab083eb126edb7718639.png" src="../_images/b957bcdff4ad9078d4a9daf5e94145500fd94c4a6ca4ab083eb126edb7718639.png" />
+<img alt="../_images/72aa50eb2a223786b3ae5684a46e73cfa77477a41eeeaa373ff916a728828130.png" src="../_images/72aa50eb2a223786b3ae5684a46e73cfa77477a41eeeaa373ff916a728828130.png" />
 </div>
 </div>
+<section id="note-that-we-can-still-have-access-to-gradients-with-respect-to-the-any-of-the-layers-in-the-computational-graph-if-connected">
+<h3>Note that we can still have access to gradients with respect to the any of the layers in the Computational Graph (if connected)<a class="headerlink" href="#note-that-we-can-still-have-access-to-gradients-with-respect-to-the-any-of-the-layers-in-the-computational-graph-if-connected" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">loss_value</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">((</span><span class="n">y_pred</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">grads</span> <span class="o">=</span> <span class="p">(</span><span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss_value</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">weights</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grads</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[-1.664384]], dtype=float32)&gt;, &lt;tf.Tensor: shape=(1,), dtype=float32, numpy=array([-0.20064919], dtype=float32)&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -1661,7 +1707,10 @@ _________________________________________________________________
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-6-custom-model-with-keras-class-api-and-standard-loop">Version 6: Custom model with Keras <code class="docutils literal notranslate"><span class="pre">class</span></code> API  and standard loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-7-using-train-step-rightarrow-control-loss-and-gradients-on-a-custom-model">Version 7: Using <code class="docutils literal notranslate"><span class="pre">train_step</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control loss and gradients on a custom model.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-8-using-train-step-rightarrow-control-loss-and-gradients-on-a-standard-model">Version 8: Using <code class="docutils literal notranslate"><span class="pre">train_step</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control loss and gradients on a standard model.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-9-using-train-on-batch-rightarrow-control-data">Version 9: using <code class="docutils literal notranslate"><span class="pre">train_on_batch</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-9-using-train-on-batch-rightarrow-control-data">Version 9: using <code class="docutils literal notranslate"><span class="pre">train_on_batch</span></code> <span class="math notranslate nohighlight">\(\rightarrow\)</span> control data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-we-can-still-have-access-to-gradients-with-respect-to-the-any-of-the-layers-in-the-computational-graph-if-connected">Note that we can still have access to gradients with respect to the any of the layers in the Computational Graph (if connected)</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
